@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>The Core Six — Kỷ Niệm Thanh Xuân</title>
+
+    <!-- Multi-device Responsive Favicons -->
+    <link rel="icon" type="image/x-icon" href="images/favicons/main/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/main/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/main/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicons/main/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/main/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicons/main/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="images/favicons/main/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#E8D2B5" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              warmCream: "#E8D2B5",
+              sageGreen: "#A5A79B",
+              terracotta: "#D97757",
+              espresso: "#2D2C2A",
+              warmBg: "#F7EFE5",
+              sageLight: "#ECEFE6",
+              sageDark: "#65675C",
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+              handwriting: ['"Caveat"', "cursive"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Custom CSS (Separated Layer Architecture) -->
+    <link rel="stylesheet" href="css/a7f3c91e.css" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome 6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  </head>
+  <body class="relative">
+    <!-- 1. LOCK SCREEN (Birthdate input check, 3h auto session) -->
+    <div
+      id="lock-screen"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-espresso/90 backdrop-blur-xl transition-all duration-700"
+    >
+      <div
+        class="blob-shape w-72 h-72 sm:w-96 sm:h-96 bg-sageGreen -top-20 -left-20 animate-pulse"
+      ></div>
+      <div
+        class="blob-shape w-72 h-72 sm:w-96 sm:h-96 bg-terracotta -bottom-20 -right-20 opacity-40"
+      ></div>
+
+      <div
+        class="earthy-card max-w-md w-full p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] relative z-10 border border-white/20 shadow-2xl text-center"
+      >
+        <div
+          class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl bg-terracotta/20 text-terracotta flex items-center justify-center text-xl sm:text-2xl shadow-inner"
+        >
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <span
+          class="text-xs font-semibold tracking-widest text-terracotta uppercase mb-1 block"
+          >Bảo Mật Kỷ Niệm</span
+        >
+        <h2 class="text-2xl sm:text-3xl font-bold text-espresso mb-2 font-serif">
+          The Core Six
+        </h2>
+        <p class="text-xs text-espresso/70 mb-6 font-light leading-relaxed">
+          Nhập chính xác ngày sinh của bạn (Định dạng:
+          <code
+            class="bg-espresso/10 px-1.5 py-0.5 rounded font-mono text-terracotta font-semibold"
+            >DD/MM/YYYY</code
+          >) để mở khóa không gian thanh xuân.
+        </p>
+
+        <div class="space-y-4 text-left">
+          <div>
+            <label class="block text-xs font-semibold text-espresso/80 mb-1.5"
+              >Ngày sinh xác thực:</label
+            >
+            <div class="relative">
+              <input
+                type="text"
+                id="birthdate-input"
+                placeholder="VD: 20/12/2006"
+                maxlength="10"
+                class="w-full px-4 py-3.5 rounded-2xl bg-white/90 border border-espresso/15 text-espresso text-sm tracking-wider font-mono focus:outline-none focus:border-terracotta shadow-sm"
+                onkeydown="if(event.key === 'Enter') handleLogin()"
+              />
+              <div
+                class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-espresso/40"
+              >
+                <i class="fa-regular fa-calendar"></i>
+              </div>
+            </div>
+          </div>
+          <button
+            onclick="handleLogin()"
+            class="w-full py-4 rounded-2xl bg-terracotta hover:bg-terracotta/90 text-white font-bold text-sm tracking-wide shadow-lg shadow-terracotta/30 transition transform active:scale-95"
+          >
+            Mở Khóa Kỷ Niệm ✨
+          </button>
+        </div>
+        <p class="text-[11px] text-espresso/50 mt-4 italic">
+          Khu vực riêng tư độc quyền của 6 thành viên.
+        </p>
+      </div>
+    </div>
+
+    <!-- MAIN WEBSITE CONTENT (Hidden initially until verified) -->
+    <div
+      id="main-website"
+      class="opacity-0 pointer-events-none transition-opacity duration-700 relative z-10"
+    >
+      <!-- Glowing 2D Background Blobs for Depth -->
+      <div
+        class="blob-shape w-[22rem] h-[22rem] sm:w-[28rem] sm:h-[28rem] bg-sageGreen top-10 -left-20"
+      ></div>
+      <div
+        class="blob-shape w-[24rem] h-[24rem] sm:w-[32rem] sm:h-[32rem] bg-terracotta top-1/3 -right-24 opacity-35"
+      ></div>
+      <div
+        class="blob-shape w-[24rem] h-[24rem] sm:w-[35rem] sm:h-[35rem] bg-sageGreen bottom-1/4 left-1/4 opacity-30"
+      ></div>
+
+      <div class="max-w-6xl mx-auto px-4 pt-6 sm:pt-12">
+        <!-- Header Section -->
+        <header class="text-center mb-10 relative">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-terracotta/15 border border-terracotta/30 text-terracotta text-xs font-semibold mb-4 shadow-sm"
+          >
+            <span id="welcome-badge">The Core Six Archive</span> • Kỷ Niệm Thanh Xuân
+          </div>
+
+          <h1
+            class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-espresso mb-4 leading-tight"
+          >
+            <span class="font-serif italic text-sageGreen drop-shadow-sm"
+              >Hành Trình</span
+            >
+            <span
+              class="font-handwriting text-terracotta text-5xl sm:text-7xl mx-2 drop-shadow-[0_4px_12px_rgba(217,119,87,0.35)]"
+              >Thanh Xuân</span
+            >
+            <span class="font-sans font-extrabold text-espresso">Bình Yên</span>
+          </h1>
+
+          <p
+            class="max-w-xl mx-auto text-espresso/80 text-sm sm:text-base font-light px-2 mb-6"
+          >
+            Nơi lưu giữ trọn vẹn những chuyến đi, buổi tiệc và khoảnh khắc rực
+            rỡ qua hơn 500 bức ảnh của chúng mình.
+          </p>
+
+          <!-- Action Toolbar: Upload Button & Member Corner -->
+          <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+            <button
+              onclick="openUploadModal()"
+              class="px-4 sm:px-5 py-2.5 rounded-full bg-terracotta text-white font-semibold text-xs sm:text-sm shadow-lg shadow-terracotta/30 hover:bg-terracotta/90 transition flex items-center gap-2 active:scale-95"
+            >
+              <i class="fa-solid fa-cloud-arrow-up"></i> Tải Ảnh Lên
+            </button>
+            <button
+              onclick="showInfoModal()"
+              class="px-4 sm:px-5 py-2.5 rounded-full bg-white/75 border border-espresso/15 text-espresso font-semibold text-xs sm:text-sm shadow-sm hover:bg-white transition flex items-center gap-2 active:scale-95"
+            >
+              <i class="fa-solid fa-users"></i> Góc Thành Viên
+            </button>
+            <a
+              href="media.html"
+              class="px-4 sm:px-5 py-2.5 rounded-full bg-sageGreen text-white font-semibold text-xs sm:text-sm shadow-lg shadow-sageGreen/30 hover:bg-sageDark transition flex items-center gap-2 active:scale-95"
+            >
+              <i class="fa-solid fa-photo-film"></i> Kho Ảnh & Video (735)
+            </a>
+          </div>
+        </header>
+
+        <!-- Events Overview Grid (4 Big Albums) -->
+        <section class="mb-14 sm:mb-16">
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <h2 class="text-xl sm:text-2xl font-bold font-serif text-espresso">
+                Danh Sách Sự Kiện & Chuyến Đi
+              </h2>
+              <p class="text-xs text-espresso/70 mt-0.5">
+                Các bộ album tổng hợp hành trình và sự kiện đáng nhớ của The Core Six.
+              </p>
+            </div>
+            <span
+              class="text-xs font-mono text-espresso/70 bg-white/60 px-3 py-1 rounded-full border border-espresso/10 whitespace-nowrap"
+              ><i class="fa-solid fa-folder-open mr-1"></i> 4 Album Lớn</span
+            >
+          </div>
+
+          <div class="events-grid" id="events-container">
+            <!-- Event cards dynamically injected -->
+          </div>
+        </section>
+
+        <!-- BANNER LIÊN KẾT SANG TRANG TOÀN BỘ ẢNH VÀ VIDEO -->
+        <section class="mb-14 sm:mb-16">
+          <div class="earthy-card rounded-3xl p-6 sm:p-8 shadow-xl border border-terracotta/30 bg-gradient-to-br from-[#FFF9F2] via-white to-[#F2E8DC] relative overflow-hidden">
+            <div class="blob-shape w-48 h-48 bg-terracotta/20 -right-10 -bottom-10"></div>
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div class="max-w-xl">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-terracotta/15 text-terracotta text-xs font-mono font-bold uppercase tracking-wider mb-2">
+                  <i class="fa-solid fa-sparkles"></i> Kho Lưu Trữ Đầy Đủ
+                </span>
+                <h3 class="text-xl sm:text-2xl font-bold font-serif text-espresso">
+                  Khám Phá Toàn Bộ Ảnh & Thước Phim Kỷ Niệm
+                </h3>
+                <p class="text-xs sm:text-sm text-espresso/70 font-light mt-1.5 leading-relaxed">
+                  Trang riêng biệt tập hợp hơn <b>735 bức ảnh</b> (bao gồm kỷ niệm nhóm <i>our</i> và từng thành viên) cùng <b>rạp phim nhỏ</b> lưu giữ các đoạn vlog, video thanh xuân.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 shrink-0">
+                <a
+                  href="media.html"
+                  class="px-6 py-3.5 rounded-2xl bg-terracotta hover:bg-terracotta/90 text-white font-bold text-xs sm:text-sm shadow-xl shadow-terracotta/30 transition flex items-center gap-2 transform active:scale-95 group"
+                >
+                  <span>Xem Toàn Bộ Ảnh & Video</span>
+                  <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Guestbook & Memory Notes Section -->
+        <section id="guestbook-section" class="max-w-3xl mx-auto mb-16 sm:mb-20">
+          <div
+            class="earthy-card rounded-3xl p-5 sm:p-8 shadow-xl border border-espresso/10"
+          >
+            <div class="flex items-center gap-3 mb-6">
+              <div
+                class="w-10 h-10 rounded-xl bg-terracotta/20 text-terracotta flex items-center justify-center text-lg"
+              >
+                <i class="fa-solid fa-book-bookmark"></i>
+              </div>
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-espresso font-serif">
+                  Sổ Lưu Bút
+                </h3>
+                <p class="text-xs text-espresso/70">
+                  Nơi trình bày tâm tư nguyện vọng và những bức xúc thân thương
+                </p>
+              </div>
+            </div>
+
+            <!-- Add Note Form -->
+            <div class="space-y-3.5 mb-6">
+              <div>
+                <input
+                  type="text"
+                  id="guestbook-author"
+                  placeholder="Tên của bạn ..."
+                  class="w-full px-4 py-3 rounded-2xl bg-white/70 border border-espresso/15 text-espresso text-sm focus:outline-none focus:border-terracotta"
+                />
+              </div>
+              <div>
+                <textarea
+                  id="guestbook-message"
+                  rows="3"
+                  placeholder="Viết đôi lời gửi gắm đến nhóm..."
+                  class="w-full px-4 py-3 rounded-2xl bg-white/70 border border-espresso/15 text-espresso text-sm focus:outline-none focus:border-terracotta"
+                ></textarea>
+              </div>
+              <div class="flex justify-center pt-1">
+                <button
+                  onclick="addGuestbookNote()"
+                  class="px-8 py-3.5 rounded-2xl bg-terracotta hover:bg-terracotta/90 text-white font-bold text-sm shadow-lg shadow-terracotta/30 transition transform active:scale-95 flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-paper-plane text-xs"></i> Gửi Lời Nhắn 💌
+                </button>
+              </div>
+            </div>
+
+            <!-- Notes Container -->
+            <div id="guestbook-container" class="space-y-3 max-h-96 overflow-y-auto pr-1 no-scrollbar">
+              <!-- Dynamically injected guestbook notes -->
+            </div>
+          </div>
+        </section>
+
+        <!-- KHUNG MÃ QR ỦNG HỘ / QUỸ NHÓM (ELEGANT EARTHY CARD) -->
+        <section class="max-w-md mx-auto mb-20 px-2">
+          <div class="earthy-card rounded-[2.5rem] p-6 sm:p-7 shadow-2xl border border-terracotta/25 relative overflow-hidden text-center bg-gradient-to-b from-[#FFFDF9] via-[#FAF3EC] to-[#F3E8DC] group hover:border-terracotta/50 transition-all duration-300">
+            <!-- Decorative Subtle Accent Glow -->
+            <div class="blob-shape w-40 h-40 bg-terracotta/15 -top-12 -right-12"></div>
+            <div class="blob-shape w-40 h-40 bg-sageGreen/15 -bottom-12 -left-12"></div>
+
+            <div class="relative z-10">
+              <!-- Badge -->
+              <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-terracotta/15 text-terracotta text-[11px] font-mono font-bold uppercase tracking-wider mb-3">
+                <i class="fa-solid fa-heart text-terracotta"></i> Góp Gạch Nuôi Tuấn Anh
+              </div>
+
+              <!-- Title -->
+              <h3 class="text-xl sm:text-2xl font-bold font-serif text-espresso">
+                Quỹ Góp Gạch Nuôi Tuấn Anh Bằng Bánh Tráng và Trà Sữa 🧋
+              </h3>
+              <p class="text-xs text-espresso/70 mt-1 font-light leading-relaxed max-w-xs mx-auto">
+                Quét mã VietQR để tiếp sức cho những buổi trà sữa.
+              </p>
+
+              <!-- QR Container with Elegant Double Border Frame -->
+              <div class="my-5 inline-block p-3.5 sm:p-4 rounded-3xl bg-white/95 border-2 border-dashed border-terracotta/40 shadow-xl shadow-terracotta/10 group-hover:border-terracotta group-hover:scale-[1.02] transition-transform duration-300">
+                <div class="relative overflow-hidden rounded-2xl bg-white p-2">
+                  <img
+                    src="images/qr_donate.jpg"
+                    alt="Mã QR Chuyển Khoản - NGUYEN TUAN ANH"
+                    class="w-56 h-auto sm:w-64 mx-auto object-contain rounded-xl"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <!-- Beneficiary Card Details -->
+              <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-3.5 border border-espresso/10 text-left space-y-1.5 max-w-xs mx-auto shadow-sm">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-espresso/60 font-medium">Chủ tài khoản:</span>
+                  <span class="font-bold text-espresso uppercase font-mono tracking-wide">NGUYEN TUAN ANH</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-espresso/60 font-medium">Số tài khoản:</span>
+                  <span class="font-bold text-terracotta font-mono text-sm tracking-wider">50321122006</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] pt-1 border-t border-espresso/10">
+                  <span class="text-espresso/50">Hệ thống:</span>
+                  <span class="text-espresso/70 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-shield-halved text-emerald-600 text-[10px]"></i> VietQR • Napas 247
+                  </span>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-espresso/50 italic mt-3.5">
+                Cảm ơn bạn đã luôn đồng hành cùng Nhau! ✨
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Mobile-First Floating Bottom Navigation Bar -->
+      <nav class="bottom-nav">
+        <div
+          class="earthy-card rounded-full px-5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between shadow-2xl border border-espresso/10"
+        >
+          <button
+            onclick="scrollToTop()"
+            class="flex flex-col items-center text-terracotta hover:text-espresso transition"
+          >
+            <i class="fa-solid fa-house text-base sm:text-lg"></i>
+            <span class="text-[10px] font-medium mt-0.5">Trang Chủ</span>
+          </button>
+          <a
+            href="media.html"
+            class="flex flex-col items-center text-espresso/70 hover:text-terracotta transition"
+          >
+            <i class="fa-solid fa-photo-film text-base sm:text-lg"></i>
+            <span class="text-[10px] font-medium mt-0.5">Kho Media</span>
+          </a>
+          <div class="relative -top-4 sm:-top-5">
+            <button
+              onclick="showInfoModal()"
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-terracotta text-white flex items-center justify-center shadow-lg shadow-terracotta/40 hover:scale-105 active:scale-95 transition"
+              title="Góc 6 thành viên"
+            >
+              <i class="fa-solid fa-users text-lg sm:text-xl"></i>
+            </button>
+          </div>
+          <button
+            onclick="showGuestbookFocus()"
+            class="flex flex-col items-center text-espresso/70 hover:text-terracotta transition"
+          >
+            <i class="fa-solid fa-book-open text-base sm:text-lg"></i>
+            <span class="text-[10px] font-medium mt-0.5">Lưu Bút</span>
+          </button>
+          <button
+            onclick="openGameModal()"
+            class="flex flex-col items-center text-espresso/70 hover:text-sageGreen transition group"
+          >
+            <i
+              class="fa-solid fa-shield-heart text-base sm:text-lg group-hover:scale-110 transition duration-300"
+            ></i>
+            <span class="text-[10px] font-medium mt-0.5">Mini-Game</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- EVENT ALBUM MODAL -->
+      <div
+        id="event-modal"
+        class="fixed inset-0 z-50 bg-[#F7EFE5] opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col overflow-hidden"
+      >
+        <div
+          class="px-4 sm:px-6 py-3.5 sm:py-4 earthy-card border-b border-espresso/10 flex items-center justify-between relative z-10 shrink-0"
+        >
+          <div class="flex items-center gap-3">
+            <button
+              onclick="closeEventModal()"
+              class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-espresso/10 hover:bg-espresso/20 flex items-center justify-center text-espresso transition"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+              <span
+                id="modal-event-date"
+                class="text-[11px] font-mono text-terracotta font-semibold uppercase tracking-wider"
+                >Date</span
+              >
+              <h2
+                id="modal-event-title"
+                class="text-base sm:text-xl font-bold text-espresso font-serif line-clamp-1"
+              >
+                Event Title
+              </h2>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span
+              id="modal-event-count"
+              class="px-3 py-1 rounded-full bg-terracotta/15 text-terracotta text-xs font-mono font-semibold"
+              >0 ảnh</span
+            >
+          </div>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4 sm:p-8 no-scrollbar">
+          <div class="max-w-5xl mx-auto">
+            <p
+              id="modal-event-desc"
+              class="text-espresso/80 text-xs sm:text-base font-light mb-5 bg-white/50 p-3 sm:p-4 rounded-2xl border border-espresso/10"
+            >
+              Description
+            </p>
+            <div id="modal-album-grid" class="album-photo-grid pb-24"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BIRTHDAY EVENT SUB-ALBUMS MODAL -->
+      <div
+        id="birthday-submodal"
+        class="fixed inset-0 z-50 bg-[#F7EFE5] opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col overflow-hidden"
+      >
+        <div
+          class="px-4 sm:px-6 py-3.5 sm:py-4 earthy-card border-b border-espresso/10 flex items-center justify-between relative z-10 shrink-0"
+        >
+          <div class="flex items-center gap-3">
+            <button
+              onclick="closeBirthdaySubModal()"
+              class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-espresso/10 hover:bg-espresso/20 flex items-center justify-center text-espresso transition"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+              <span
+                class="text-[11px] font-mono text-terracotta font-semibold uppercase tracking-wider"
+                >Tháng 12/2025</span
+              >
+              <h2 class="text-base sm:text-xl font-bold text-espresso font-serif">
+                Sinh Nhật Rực Rỡ Tuổi 20 (Sub-Albums)
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4 sm:p-8 no-scrollbar">
+          <div class="max-w-5xl mx-auto">
+            <p
+              class="text-espresso/80 text-xs sm:text-base font-light mb-5 bg-white/50 p-3 sm:p-4 rounded-2xl border border-espresso/10"
+            >
+              Chọn sub-album theo từng thành viên và năm sinh nhật để xem trọn bộ khoảnh khắc.
+            </p>
+
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-24"
+              id="birthday-subalbums-list"
+            >
+              <!-- Dynamically rendered birthday sub-albums -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIGHTBOX ZOOM MODAL (Có công cụ xoay ảnh, lật gương nếu ảnh bị ngược) -->
+      <div
+        id="lightbox"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-espresso/95 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 p-3 sm:p-6"
+      >
+        <!-- Lightbox Action Toolbar (Rotate / Flip / Close) -->
+        <div class="absolute top-4 right-4 flex items-center gap-2 z-50">
+          <button
+            onclick="rotateLightbox(-90)"
+            class="lightbox-btn"
+            title="Xoay trái 90°"
+          >
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+          <button
+            onclick="rotateLightbox(90)"
+            class="lightbox-btn"
+            title="Xoay phải 90°"
+          >
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+          <button
+            onclick="flipLightboxH()"
+            class="lightbox-btn"
+            title="Lật gương ngang"
+          >
+            <i class="fa-solid fa-arrows-left-right"></i>
+          </button>
+          <button
+            onclick="closeLightbox()"
+            class="lightbox-btn bg-white/30 hover:bg-white/40"
+            title="Đóng (Esc)"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div
+          class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center justify-center"
+        >
+          <img
+            id="lightbox-img"
+            src=""
+            alt="Zoomed Photo"
+            class="max-h-[75vh] w-auto max-w-full object-contain rounded-2xl shadow-2xl transition-transform duration-300"
+          />
+          <p
+            id="lightbox-caption"
+            class="text-white/85 text-xs sm:text-sm mt-3 font-light text-center font-mono px-4"
+          >
+            Khoảnh khắc thanh xuân
+          </p>
+        </div>
+      </div>
+
+      <!-- Mini-Game Hub Modal -->
+      <div
+        id="gameModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300"
+      >
+        <div
+          class="bg-warmBg w-full max-w-md rounded-3xl p-5 sm:p-6 shadow-2xl border border-gray-100 transform scale-95 transition-transform duration-300"
+          id="gameModalContent"
+        >
+          <!-- Modal Header -->
+          <div
+            class="flex items-center justify-between pb-3.5 border-b border-gray-200/60"
+          >
+            <div class="flex items-center gap-2">
+              <span
+                class="w-8 h-8 rounded-full bg-sageLight text-sageDark flex items-center justify-center text-sm"
+              >
+                <i class="fa-solid fa-gamepad"></i>
+              </span>
+              <h3 class="font-bold text-gray-900 text-base sm:text-lg">
+                The Core Six • Mini-Games
+              </h3>
+            </div>
+            <button
+              onclick="closeGameModal()"
+              class="w-8 h-8 rounded-full bg-gray-200/60 hover:bg-gray-300 flex items-center justify-center text-gray-600 transition"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Game List -->
+          <div class="py-3.5 space-y-2.5">
+            <!-- Game 1: Ma Sói -->
+            <a
+              href="minigame/masoi.html"
+              class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-gray-200/80 hover:border-terracotta hover:shadow-md transition group"
+            >
+              <div
+                class="w-11 h-11 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-lg group-hover:scale-105 transition"
+              >
+                <i class="fa-solid fa-shield-cat"></i>
+              </div>
+              <div class="flex-1">
+                <h4
+                  class="font-bold text-gray-800 text-sm group-hover:text-terracotta transition"
+                >
+                  Ma Sói Core Six (Lập phòng & Chia vai)
+                </h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">
+                  Phân vai 6-15 người chơi, thẻ bài bí mật và lật mặt.
+                </p>
+              </div>
+              <i
+                class="fa-solid fa-chevron-right text-gray-400 text-xs group-hover:translate-x-1 transition"
+              ></i>
+            </a>
+
+            <!-- Game 2: Truth or Dare -->
+            <a
+              href="minigame/truthordare.html"
+              class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-gray-200/80 hover:border-sageGreen hover:shadow-md transition group"
+            >
+              <div
+                class="w-11 h-11 rounded-xl bg-sageLight text-sageDark flex items-center justify-center text-lg group-hover:scale-105 transition"
+              >
+                <i class="fa-solid fa-dice"></i>
+              </div>
+              <div class="flex-1">
+                <h4
+                  class="font-bold text-gray-800 text-sm group-hover:text-sageGreen transition"
+                >
+                  Truth or Dare (80 lá thử thách)
+                </h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">
+                  Khai thật hoặc nhận thử thách lầy lội cùng 6 đứa.
+                </p>
+              </div>
+              <i
+                class="fa-solid fa-chevron-right text-gray-400 text-xs group-hover:translate-x-1 transition"
+              ></i>
+            </a>
+
+            <!-- Game 3: Vòng Quay May Mắn -->
+            <a
+              href="minigame/random.html"
+              class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-gray-200/80 hover:border-sageGreen hover:shadow-md transition group"
+            >
+              <div
+                class="w-11 h-11 rounded-xl bg-sageLight text-sageDark flex items-center justify-center text-lg group-hover:scale-105 transition"
+              >
+                <i class="fa-solid fa-dharmachakra"></i>
+              </div>
+              <div class="flex-1">
+                <h4
+                  class="font-bold text-gray-800 text-sm group-hover:text-sageGreen transition"
+                >
+                  Vòng Quay May Mắn
+                </h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">
+                  Bốc thăm người trả tiền trà sữa, người bị phạt.
+                </p>
+              </div>
+              <i
+                class="fa-solid fa-chevron-right text-gray-400 text-xs group-hover:translate-x-1 transition"
+              ></i>
+            </a>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="pt-2 text-center">
+            <p class="text-[11px] text-gray-400">
+              Chọn một trò chơi để bắt đầu cuộc vui cùng 6 thành viên nhé! 🌿
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- INFO MODAL (The Core Six Registry) -->
+      <div
+        id="info-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-espresso/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4"
+      >
+        <div
+          class="earthy-card max-w-md w-full p-5 sm:p-6 rounded-3xl relative border border-espresso/20 shadow-2xl bg-[#F7EFE5]"
+        >
+          <button
+            onclick="closeInfoModal()"
+            class="absolute top-4 right-4 text-espresso/70 hover:text-espresso"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+          <h3 class="text-xl sm:text-2xl font-bold text-espresso mb-1 font-serif">
+            The Core Six 🌿
+          </h3>
+          <p class="text-xs text-espresso/70 mb-5">
+            Bấm vào tên thành viên bất kỳ để khám phá bộ sưu tập ảnh cá nhân:
+          </p>
+          <div class="space-y-2 mb-5 text-sm">
+            <div
+              onclick="openMemberGallery('Nguyễn Hương Giang')"
+              class="bg-white/65 p-3 rounded-2xl border border-espresso/5 flex justify-between items-center cursor-pointer hover:border-terracotta transition group"
+            >
+              <span
+                class="font-semibold text-espresso group-hover:text-terracotta transition"
+                >Nguyễn Hương Giang
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1 opacity-50"
+                ></i
+              ></span>
+              <span class="text-xs text-terracotta font-mono font-bold"
+                >25/07/2006</span
+              >
+            </div>
+            <div
+              onclick="openMemberGallery('Đỗ Hữu Tuân')"
+              class="bg-white/65 p-3 rounded-2xl border border-espresso/5 flex justify-between items-center cursor-pointer hover:border-terracotta transition group"
+            >
+              <span
+                class="font-semibold text-espresso group-hover:text-terracotta transition"
+                >Đỗ Hữu Tuân
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1 opacity-50"
+                ></i
+              ></span>
+              <span class="text-xs text-terracotta font-mono font-bold"
+                >16/04/2006</span
+              >
+            </div>
+            <div
+              onclick="openMemberGallery('Chu Thị Lan Anh')"
+              class="bg-white/65 p-3 rounded-2xl border border-espresso/5 flex justify-between items-center cursor-pointer hover:border-terracotta transition group"
+            >
+              <span
+                class="font-semibold text-espresso group-hover:text-terracotta transition"
+                >Chu Thị Lan Anh
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1 opacity-50"
+                ></i
+              ></span>
+              <span class="text-xs text-terracotta font-mono font-bold"
+                >24/10/2006</span
+              >
+            </div>
+            <div
+              onclick="openMemberGallery('Nguyễn Văn Đạt')"
+              class="bg-white/65 p-3 rounded-2xl border border-espresso/5 flex justify-between items-center cursor-pointer hover:border-terracotta transition group"
+            >
+              <span
+                class="font-semibold text-espresso group-hover:text-terracotta transition"
+                >Nguyễn Văn Đạt
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1 opacity-50"
+                ></i
+              ></span>
+              <span class="text-xs text-terracotta font-mono font-bold"
+                >09/04/2006</span
+              >
+            </div>
+            <div
+              onclick="openMemberGallery('Nguyễn Tuấn Anh')"
+              class="bg-white/65 p-3 rounded-2xl border border-espresso/5 flex justify-between items-center cursor-pointer hover:border-terracotta transition group"
+            >
+              <span
+                class="font-semibold text-espresso group-hover:text-terracotta transition"
+                >Nguyễn Tuấn Anh
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1 opacity-50"
+                ></i
+              ></span>
+              <span class="text-xs text-terracotta font-mono font-bold"
+                >20/12/2006</span
+              >
+            </div>
+            <div
+              onclick="openMemberGallery('Phan Lạc Quốc Anh')"
+              class="bg-white/65 p-3 rounded-2xl border border-espresso/5 flex justify-between items-center cursor-pointer hover:border-terracotta transition group"
+            >
+              <span
+                class="font-semibold text-espresso group-hover:text-terracotta transition"
+                >Phan Lạc Quốc Anh
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1 opacity-50"
+                ></i
+              ></span>
+              <span class="text-xs text-terracotta font-mono font-bold"
+                >20/10/2006</span
+              >
+            </div>
+          </div>
+          <button
+            onclick="closeInfoModal()"
+            class="w-full py-3 rounded-xl bg-terracotta hover:bg-terracotta/90 text-white font-semibold text-sm transition shadow-md active:scale-95"
+          >
+            Đóng lại
+          </button>
+        </div>
+      </div>
+
+      <!-- MEMBER PERSONAL GALLERY MODAL -->
+      <div
+        id="member-modal"
+        class="fixed inset-0 z-50 bg-[#F7EFE5] opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col overflow-hidden"
+      >
+        <div
+          class="px-4 sm:px-6 py-3.5 sm:py-4 earthy-card border-b border-espresso/10 flex items-center justify-between relative z-10 shrink-0"
+        >
+          <div class="flex items-center gap-3">
+            <button
+              onclick="closeMemberModal()"
+              class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-espresso/10 hover:bg-espresso/20 flex items-center justify-center text-espresso transition"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+              <span
+                class="text-[11px] font-mono text-terracotta font-semibold uppercase tracking-wider"
+                >Góc Ảnh Cá Nhân</span
+              >
+              <h2
+                id="modal-member-name"
+                class="text-base sm:text-xl font-bold text-espresso font-serif line-clamp-1"
+              >
+                Tên Thành Viên
+              </h2>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span
+              id="modal-member-count"
+              class="px-3 py-1 rounded-full bg-terracotta/15 text-terracotta text-xs font-mono font-semibold"
+              >0 ảnh</span
+            >
+          </div>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4 sm:p-8 no-scrollbar">
+          <div class="max-w-5xl mx-auto">
+            <p
+              class="text-espresso/80 text-xs sm:text-base font-light mb-4 bg-white/50 p-3 sm:p-4 rounded-2xl border border-espresso/10"
+            >
+              Bộ sưu tập khoảnh khắc và kỷ niệm riêng của thành viên trong nhóm (Đồng bộ Cloud Realtime).
+            </p>
+
+            <!-- Search & Filter Bar -->
+            <div class="mb-5 space-y-2.5">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="member-search-input"
+                  oninput="filterMemberPhotos()"
+                  placeholder="Tìm kiếm theo chú thích, năm, chủ đề..."
+                  class="w-full px-4 py-2.5 sm:py-3 rounded-2xl bg-white/80 border border-espresso/15 text-espresso text-xs sm:text-sm pl-10 focus:outline-none focus:border-terracotta shadow-sm"
+                />
+                <div
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso/40 text-xs sm:text-sm"
+                >
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+              </div>
+              <div
+                class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar"
+                id="member-filter-buttons"
+              >
+                <button
+                  onclick="setMemberFilter('all', this)"
+                  class="px-3.5 py-1.5 rounded-full bg-terracotta text-white text-xs font-semibold whitespace-nowrap shadow-sm transition filter-btn"
+                >
+                  Tất cả
+                </button>
+                <button
+                  onclick="setMemberFilter('2025', this)"
+                  class="px-3.5 py-1.5 rounded-full bg-white/70 text-espresso/80 border border-espresso/15 text-xs font-semibold whitespace-nowrap hover:border-terracotta transition filter-btn"
+                >
+                  2025
+                </button>
+                <button
+                  onclick="setMemberFilter('2026', this)"
+                  class="px-3.5 py-1.5 rounded-full bg-white/70 text-espresso/80 border border-espresso/15 text-xs font-semibold whitespace-nowrap hover:border-terracotta transition filter-btn"
+                >
+                  2026
+                </button>
+                <button
+                  onclick="setMemberFilter('Chân dung', this)"
+                  class="px-3.5 py-1.5 rounded-full bg-white/70 text-espresso/80 border border-espresso/15 text-xs font-semibold whitespace-nowrap hover:border-terracotta transition filter-btn"
+                >
+                  Chân dung
+                </button>
+                <button
+                  onclick="setMemberFilter('Du lịch', this)"
+                  class="px-3.5 py-1.5 rounded-full bg-white/70 text-espresso/80 border border-espresso/15 text-xs font-semibold whitespace-nowrap hover:border-terracotta transition filter-btn"
+                >
+                  Du lịch
+                </button>
+              </div>
+            </div>
+
+            <div id="modal-member-grid" class="album-photo-grid pb-24"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPLOAD PHOTO MODAL -->
+      <div
+        id="upload-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-espresso/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4"
+      >
+        <div
+          class="earthy-card max-w-lg w-full p-5 sm:p-8 rounded-3xl relative border border-espresso/20 shadow-2xl bg-[#F7EFE5]"
+        >
+          <button
+            onclick="closeUploadModal()"
+            class="absolute top-4 right-4 text-espresso/70 hover:text-espresso"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+          <h3 class="text-xl sm:text-2xl font-bold text-espresso mb-1 font-serif">
+            Tải Ảnh Lên Kỷ Niệm 📸
+          </h3>
+          <p class="text-xs text-espresso/70 mb-5">
+            Thêm ảnh mới vào album sự kiện hoặc góc ảnh cá nhân (Đồng bộ cho cả 6 thành viên).
+          </p>
+
+          <div class="space-y-3.5 text-left">
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1"
+                >Chọn ảnh từ thiết bị:</label
+              >
+              <input
+                type="file"
+                id="upload-file-input"
+                accept="image/*"
+                class="w-full text-xs text-espresso/80 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-terracotta file:text-white hover:file:bg-terracotta/90 cursor-pointer bg-white/60 p-2 rounded-2xl border border-espresso/15"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1"
+                >Chú thích / Tiêu đề ảnh:</label
+              >
+              <input
+                type="text"
+                id="upload-caption-input"
+                placeholder="VD: Khoảnh khắc đáng nhớ ở Sapa..."
+                class="w-full px-4 py-2.5 sm:py-3 rounded-2xl bg-white/80 border border-espresso/15 text-espresso text-xs sm:text-sm focus:outline-none focus:border-terracotta"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-espresso/80 mb-1"
+                >Chọn nơi lưu trữ (Album hoặc Góc cá nhân):</label
+              >
+              <select
+                id="upload-target-select"
+                class="w-full px-4 py-2.5 sm:py-3 rounded-2xl bg-white/80 border border-espresso/15 text-espresso text-xs sm:text-sm focus:outline-none focus:border-terracotta"
+              >
+                <option value="event_1">Sự kiện: Hành Trình Chơi & Gặp Gỡ</option>
+                <option value="event_2">Sự kiện: Sinh Nhật Rực Rỡ Tuổi 20</option>
+                <option value="event_3">Sự kiện: Mùa Tổng Kết & Kỷ Yếu</option>
+                <option value="event_4">Sự kiện: Tất Niên & Chuyến Đi Xa</option>
+                <option value="member_Nguyễn Hương Giang">Góc cá nhân: Nguyễn Hương Giang</option>
+                <option value="member_Đỗ Hữu Tuân">Góc cá nhân: Đỗ Hữu Tuân</option>
+                <option value="member_Chu Thị Lan Anh">Góc cá nhân: Chu Thị Lan Anh</option>
+                <option value="member_Nguyễn Văn Đạt">Góc cá nhân: Nguyễn Văn Đạt</option>
+                <option value="member_Nguyễn Tuấn Anh">Góc cá nhân: Nguyễn Tuấn Anh</option>
+                <option value="member_Phan Lạc Quốc Anh">Góc cá nhân: Phan Lạc Quốc Anh</option>
+              </select>
+            </div>
+            <button
+              onclick="handlePhotoUpload()"
+              class="w-full py-3.5 rounded-xl bg-terracotta hover:bg-terracotta/90 text-white font-bold text-sm shadow-md shadow-terracotta/30 transition active:scale-95"
+            >
+              Tải Lên & Đồng Bộ Cloud ✨
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Notification Toast -->
+    <div
+      id="toast"
+      class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-espresso text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-2xl shadow-xl text-xs sm:text-sm font-medium opacity-0 pointer-events-none transition-all duration-300"
+    >
+      Thông báo hệ thống
+    </div>
+
+    <!-- Firebase SDK & Realtime Database Integration Layer -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        onSnapshot,
+        query,
+        orderBy,
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      import {
+        getStorage,
+        ref,
+        uploadBytes,
+        getDownloadURL,
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+      // Firebase Config
+      const firebaseConfig = {
+        apiKey: "AIzaSyCl3oYqiiDdYGS-ZWES4SKI20zd9RpdN-Y",
+        authDomain: "memories-97628.firebaseapp.com",
+        projectId: "memories-97628",
+        storageBucket: "memories-97628.firebasestorage.app",
+        messagingSenderId: "1054642141362",
+        appId: "1:1054642141362:web:1c48661da5cbfb57bcb1ab",
+        measurementId: "G-6MLKYM33NK",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const storage = getStorage(app);
+
+      window.db = db;
+      window.storage = storage;
+      window.collection = collection;
+      window.addDoc = addDoc;
+      window.onSnapshot = onSnapshot;
+      window.query = query;
+      window.orderBy = orderBy;
+      window.ref = ref;
+      window.uploadBytes = uploadBytes;
+      window.getDownloadURL = getDownloadURL;
+
+      window.initFirebaseSync = function () {
+        if (typeof initGuestbookSync === "function") initGuestbookSync();
+        if (typeof initPhotosSync === "function") initPhotosSync();
+      };
+    </script>
+
+    <!-- Data Layer (Valid dates, ourPhotosList, baseEventsData, baseMemberPhotosData) -->
+    <script src="js/data.js"></script>
+
+    <!-- Main Logic Layer (Auth, Albums, All Photos, Lightbox, Modals) -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

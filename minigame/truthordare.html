@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Truth or Dare - The Core Six 🌿</title>
+
+    <!-- Multi-device Responsive Favicons -->
+    <link rel="icon" type="image/x-icon" href="../images/favicons/truthordare/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicons/truthordare/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicons/truthordare/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="../images/favicons/truthordare/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicons/truthordare/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/favicons/truthordare/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="../images/favicons/truthordare/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#587d71" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sageGreen: "#587d71",
+              sageLight: "#e8efe9",
+              sageDark: "#3b544b",
+              warmBg: "#f9f9f6",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .card-3d {
+        perspective: 1000px;
+      }
+      .card-inner {
+        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        transform-style: preserve-3d;
+      }
+      .card-inner.is-flipped {
+        transform: rotateY(180deg);
+      }
+      .card-front,
+      .card-back {
+        backface-visibility: hidden;
+      }
+      .card-back {
+        transform: rotateY(180deg);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-warmBg text-gray-800 min-h-screen flex flex-col justify-between font-sans selection:bg-sageGreen selection:text-white antialiased"
+  >
+    <!-- Header / Navbar Mobile Optimized -->
+    <header
+      class="w-full py-3 px-4 sm:px-8 flex items-center justify-between border-b border-gray-200/60 bg-white/80 backdrop-blur-md sticky top-0 z-50"
+    >
+      <a
+        href="../index.html"
+        class="flex items-center gap-1.5 text-sageDark font-semibold text-xs sm:text-sm hover:opacity-80 transition py-1"
+      >
+        <i class="fa-solid fa-arrow-left"></i> Trang chủ
+      </a>
+      <h1
+        class="text-sm sm:text-lg font-bold text-sageDark tracking-wide truncate max-w-[180px] sm:max-w-none"
+      >
+        Truth or Dare 🎲
+      </h1>
+      <div class="w-16"></div>
+      <!-- Spacer -->
+    </header>
+
+    <!-- Main Game Container -->
+    <main
+      class="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 max-w-xl mx-auto w-full my-auto"
+    >
+      <div class="text-center mb-6 sm:mb-8">
+        <span
+          class="px-3.5 py-1 rounded-full bg-sageLight text-sageDark text-[11px] sm:text-xs font-semibold uppercase tracking-wider"
+          >Bộ bài 80 lá kỷ niệm</span
+        >
+        <h2 class="text-xl sm:text-3xl font-bold text-gray-900 mt-2">
+          Hôm nay khai thật hay chịu phạt?
+        </h2>
+        <p class="text-gray-500 text-xs sm:text-sm mt-1">
+          Chạm vào thẻ bài để lật lên hoặc úp xuống nhé!
+        </p>
+      </div>
+
+      <!-- Card Box (Tối ưu chiều cao trên mobile) -->
+      <div
+        class="card-3d w-full h-72 sm:h-88 mb-6 sm:mb-8 cursor-pointer select-none"
+        onclick="handleCardClick()"
+      >
+        <div
+          id="card-inner"
+          class="card-inner relative w-full h-full rounded-3xl shadow-xl bg-white border border-gray-100 flex flex-col items-center justify-center p-6 sm:p-8 text-center"
+        >
+          <!-- Front Side (Mặt úp thẻ bài) -->
+          <div
+            class="card-front absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-sageGreen to-sageDark rounded-3xl text-white shadow-inner"
+          >
+            <div
+              class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/20 flex items-center justify-center mb-3 text-xl sm:text-2xl"
+            >
+              <i class="fa-solid fa-clover"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold tracking-wide">
+              THE CORE SIX
+            </h3>
+            <p class="text-white/80 text-xs sm:text-sm mt-1.5 px-4">
+              Chạm để rút lá bài định mệnh cho nhóm
+            </p>
+            <span
+              class="mt-4 sm:mt-6 text-[11px] sm:text-xs bg-white/20 px-3.5 py-1.5 rounded-full uppercase tracking-widest font-medium"
+              >Bấm để rút bài ✨</span
+            >
+          </div>
+
+          <!-- Back Side (Mặt ngửa nội dung câu hỏi) -->
+          <div
+            class="card-back absolute inset-0 flex flex-col items-center justify-between p-6 sm:p-8 bg-white rounded-3xl border-2 border-sageGreen/20"
+          >
+            <div class="w-full flex justify-between items-center">
+              <span
+                id="card-type-badge"
+                class="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase"
+                >Sự Thật</span
+              >
+              <span class="text-[11px] text-gray-400 font-mono"
+                >#TheCoreSix</span
+              >
+            </div>
+            <div class="my-auto py-2">
+              <p
+                id="card-content"
+                class="text-base sm:text-xl font-medium text-gray-800 leading-relaxed"
+              >
+                Bấm nút bên dưới hoặc chạm vào bài để bắt đầu!
+              </p>
+            </div>
+            <div
+              class="text-[11px] sm:text-xs text-sageDark font-semibold flex items-center gap-1 bg-sageLight px-3 py-1 rounded-full"
+            >
+              <i class="fa-solid fa-hand-pointer"></i> Chạm để úp lại
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons (Responsive Grid cho mobile) -->
+      <div class="grid grid-cols-3 gap-2 sm:gap-3 w-full">
+        <button
+          onclick="
+            event.stopPropagation();
+            drawSpecific('truth');
+          "
+          class="py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl sm:rounded-2xl bg-white border-2 border-sageGreen text-sageDark font-semibold text-xs sm:text-sm shadow-sm hover:bg-sageLight active:scale-95 transition flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2"
+        >
+          <i class="fa-solid fa-face-smile text-sm"></i> <span>Truth</span>
+        </button>
+        <button
+          onclick="
+            event.stopPropagation();
+            drawCard();
+          "
+          class="py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl sm:rounded-2xl bg-sageGreen text-white font-bold text-xs sm:text-sm shadow-md hover:bg-sageDark active:scale-95 transition flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2"
+        >
+          <i class="fa-solid fa-shuffle text-sm"></i> <span>Ngẫu nhiên</span>
+        </button>
+        <button
+          onclick="
+            event.stopPropagation();
+            drawSpecific('dare');
+          "
+          class="py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl sm:rounded-2xl bg-white border-2 border-rose-500 text-rose-600 font-semibold text-xs sm:text-sm shadow-sm hover:bg-rose-50 active:scale-95 transition flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2"
+        >
+          <i class="fa-solid fa-fire text-sm"></i> <span>Dare</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-[11px] text-gray-400">
+      Made with 🌿 for The Core Six • 2026
+    </footer>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-900/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs sm:text-sm shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none z-50 text-center whitespace-nowrap"
+    >
+      Thông báo hệ thống
+    </div>
+
+    <!-- JavaScript Xử lý logic game -->
+    <script>
+      const truths = [
+        "Kỷ niệm vui nhất/bựa nhất của bạn với một thành viên trong nhóm là gì?",
+        "Ai trong 6 đứa là người bạn ấn tượng ít nói nhất lần đầu gặp mặt?",
+        "Thú nhận đi, đã bao giờ bạn nói dối lý do bận để trốn kèo đi chơi của nhóm chưa?",
+        "Điều gì ở các thành viên khác khiến bạn cảm thấy quý trọng nhất?",
+        "Nếu được đổi một tính cách của một đứa trong nhóm cho mình, bạn chọn ai?",
+        "Ai trong nhóm là người có nguy cơ 'ế' lâu nhất theo suy nghĩ của bạn?",
+        "Kể tên một lần bạn dỗi ngầm một thành viên trong nhóm nhưng chưa dám nói.",
+        "Món quà nào nhận từ các bạn trong nhóm khiến bạn nhớ nhất?",
+        "Ai là người hay trễ giờ nhất trong các buổi hẹn hò của The Core Six?",
+        "Nếu nhóm làm một chuyến du lịch xa xuyên Việt, ai sẽ là thủ quỹ đáng tin cậy nhất?",
+        "Điều điên rồ nhất bạn từng làm cùng nhóm là gì?",
+        "Nếu phải 'bóc phốt' một thói quen xấu của người ngồi bên trái bạn, bạn sẽ nói gì?",
+        "Ai trong nhóm là người dễ bị lừa nhất?",
+        "Khoảnh khắc nào của nhóm khiến bạn xúc động nhất từ trước đến nay?",
+        "Nếu trúng số độc đắc 10 tỷ, bạn sẽ chia cho 5 đứa trong nhóm bao nhiêu?",
+      ];
+
+      const dares = [
+        "Chụp một bức ảnh selfie cực kỳ 'dìm hàng' của cả nhóm rồi đăng lên Story Facebook/Instagram kèm caption: 'The Core Six luôn là đỉnh nhất!'.",
+        "Nhắn tin vào một nhóm chat chung (như nhóm lớp hoặc nhóm gia đình) câu nói: 'Hôm nay tớ chính thức tuyên bố mình là người đẹp trai/xinh gái nhất nhóm The Core Six'.",
+        "Đăng một status công khai lên Facebook với nội dung: 'Ai nuôi hộ tôi cục nợ này với' kèm theo ảnh chụp một thành viên bất kỳ trong nhóm ngồi cạnh bạn.",
+        "Quay một đoạn video ngắn (Reels/TikTok) 10 giây ghi lại cảnh cả nhóm đang hét lên 'The Core Six muôn năm!' và đăng lên mạng xã hội.",
+        "Truy cập vào bức ảnh gần đây nhất trên Facebook của một thành viên trong nhóm và để lại bình luận: 'Nhìn mặt quen ghê, hình như kiếp trước là nợ tiền mình'.",
+        "Đổi ảnh đại diện Zalo hoặc Messenger thành một bức ảnh hài hước/dìm hàng do nhóm tự chọn trong vòng 30 phút.",
+        "Nhắn tin cho một người bạn bất kỳ trong danh bạ (không nằm trong nhóm) câu: 'Tớ vừa quyết định đổi tên thành [Tên một thành viên trong nhóm] rồi nhé' và chụp màn hình gửi lại cho nhóm xem phản ứng.",
+        "Vào mục tìm kiếm trên Instagram/Facebook, tìm người yêu cũ hoặc crush cũ của bạn rồi bấm nhầm... thả tim một bài viết cũ từ năm ngoái, sau đó chụp màn hình thú nhận.",
+        "Livestream đúng 1 phút trên Facebook cá nhân, vừa nhìn thẳng vào camera vừa nghiêm túc đọc bài thơ hoặc một bài ca dao bất kỳ.",
+        "Gửi một chiếc sticker 'lầy lội' kèm câu chúc 'Chúc bạn ngủ ngon' vào 3 group chat khác nhau trên Messenger ngay lập tức.",
+        "Chụp màn hình một đoạn tin nhắn cũ buồn cười nhất giữa bạn và một người trong nhóm, đăng lên story kèm nhạc chill.",
+        "Thay đổi phần tiểu sử (Bio) trên Facebook/Instagram thành: 'Đại gia chân đất thuộc quyền sở hữu của The Core Six' trong vòng 2 tiếng.",
+        "Tự sướng một kiểu mặt xấu hết cỡ, đăng lên story Facebook kèm dòng chữ: 'Độc thân vui vẻ, ai hốt tôi đi'.",
+        "Nhắn tin cho một đứa bạn thân khác ngoài nhóm: 'Cậu ơi cho tớ vay 500k gấp có việc hệ trọng' rồi chờ xem nó phản ứng thế nào.",
+        "Bình luận vào 5 bài đăng mới nhất trên bảng tin Facebook của bạn bè bằng đúng một câu: 'Chuẩn không cần chỉnh!'",
+      ];
+
+      let isFlipped = false;
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.remove("opacity-0");
+        setTimeout(() => {
+          toast.classList.add("opacity-0");
+        }, 2200);
+      }
+
+      function handleCardClick() {
+        const cardInner = document.getElementById("card-inner");
+        if (isFlipped) {
+          cardInner.classList.remove("is-flipped");
+          isFlipped = false;
+          showToast("Đã úp bài lại 🃏");
+        } else {
+          drawCard();
+        }
+      }
+
+      function drawCard() {
+        const types = ["truth", "dare"];
+        const randomType = types[Math.floor(Math.random() * types.length)];
+        drawSpecific(randomType);
+      }
+
+      function drawSpecific(type) {
+        const cardInner = document.getElementById("card-inner");
+        const badge = document.getElementById("card-type-badge");
+        const content = document.getElementById("card-content");
+
+        let textList = type === "truth" ? truths : dares;
+        let randomText = textList[Math.floor(Math.random() * textList.length)];
+
+        if (type === "truth") {
+          badge.textContent = "Sự Thật (Truth)";
+          badge.className =
+            "px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase bg-emerald-100 text-emerald-800";
+        } else {
+          badge.textContent = "Thách Thức (Dare)";
+          badge.className =
+            "px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase bg-rose-100 text-rose-800";
+        }
+        content.textContent = randomText;
+
+        if (!isFlipped) {
+          cardInner.classList.add("is-flipped");
+          isFlipped = true;
+        } else {
+          cardInner.classList.remove("is-flipped");
+          setTimeout(() => {
+            cardInner.classList.add("is-flipped");
+          }, 100);
+        }
+
+        showToast("Đã rút một lá bài mới! 🃏");
+      }
+    </script>
+  </body>
+</html>
