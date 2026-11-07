@@ -1,12 +1,12 @@
 // Danh sách ngày sinh hợp lệ để mở khóa (Bảo mật kỷ niệm)
-const validBirthDates = {
-  "25/07/2006": "Nguyễn Hương Giang",
-  "16/04/2006": "Đỗ Hữu Tuân",
-  "24/10/2006": "Chu Thị Lan Anh",
-  "09/04/2006": "Nguyễn Văn Đạt",
-  "20/12/2006": "Nguyễn Tuấn Anh",
-  "20/10/2006": "Phan Lạc Quốc Anh"
-};
+const validBirthdates = [
+    { date: "25/07/2006", name: "Nguyễn Hương Giang" },
+    { date: "16/04/2006", name: "Đỗ Hữu Tuân" },
+    { date: "24/10/2006", name: "Chu Thị Lan Anh" },
+    { date: "09/04/2006", name: "Nguyễn Văn Đạt" },
+    { date: "20/12/2006", name: "Nguyễn Tuấn Anh" },
+    { date: "20/10/2006", name: "Phan Lạc Quốc Anh" }
+];
 
 // Toàn bộ ảnh trong thư mục /newmemories/our/ (264 ảnh kỷ niệm chung)
 const ourPhotosList = [
