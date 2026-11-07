@@ -9,6 +9,17 @@ let eventsData = JSON.parse(JSON.stringify(baseEventsData));
 let memberPhotosData = JSON.parse(JSON.stringify(baseMemberPhotosData));
 let guestbookNotes = [];
 
+/**
+ * Utility: Clean & normalize asset URLs for GitHub Pages and relative static hosting
+ */
+function cleanAssetUrl(url) {
+  if (!url) return "";
+  if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("data:") || url.startsWith("blob:")) {
+    return url;
+  }
+  return url.replace(/^(\.\.\/)+/, "").replace(/^\//, "");
+}
+
 // Lightbox rotation & flip state
 let currentLightboxRotation = 0;
 let currentLightboxFlippedH = false;
@@ -427,8 +438,8 @@ function renderVideosGallery() {
       } else {
         // Local MP4 or direct video url
         mediaHtml = `
-          <video controls preload="metadata" poster="${vid.poster || ''}">
-            <source src="${vid.src}" type="video/mp4">
+          <video controls preload="metadata" poster="${cleanAssetUrl(vid.poster)}">
+            <source src="${cleanAssetUrl(vid.src)}" type="video/mp4">
             Trình duyệt của bạn không hỗ trợ phát video này.
           </video>
         `;
@@ -616,7 +627,7 @@ function openLightbox(url, caption) {
   currentLightboxFlippedH = false;
   applyLightboxTransform();
 
-  lightboxImg.src = url;
+  lightboxImg.src = cleanAssetUrl(url);
   if (lightboxCaption) {
     lightboxCaption.textContent = caption || "Khoảnh khắc thanh xuân";
   }
